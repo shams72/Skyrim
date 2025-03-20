@@ -1,6 +1,4 @@
-# group1
-
-## Welcome to our BPSE DevOps Project!
+## Welcome to our BPSE DevOps Skyrim Map Project!
 
 ## Startup Guide
 
