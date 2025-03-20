@@ -2,9 +2,6 @@
 
 ## Welcome to our BPSE DevOps Project!
 
-We have finished the final Stage 5 of our project and will present our project retrospective on 05.02.2025.  
-Save the Date!
-
 ## Startup Guide
 
 ### How to get started (locally)
