@@ -1,0 +1,21 @@
+{
+    "name": "skyrim-map-app",
+    "version": "1.0.0",
+    "private": true,
+    "workspaces": [
+        "src/backend",
+        "src/frontend",
+        "src/navigation-service"
+    ],
+    "scripts": {
+        "install-all": "npm install --workspaces",
+        "uninstall-all": "npm uninstall --no-save --workspaces",
+        "test": "npm run test --workspaces",
+        "lint": "npm run lint --workspaces"
+    },
+    "devDependencies": {
+        "eslint": "^9.16.0",
+        "eslint-config-prettier": "^10.0.0",
+        "eslint-plugin-prettier": "^5.2.1"
+    }
+}

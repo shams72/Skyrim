@@ -1,0 +1,8 @@
+{
+  "include": ["server.js"],
+  "exclude": ["client.js", "tests/*.mjs"],
+  "reporter": ["text", "lcov", "cobertura"],
+  "all": true,
+  "check-coverage": true,
+  "report-dir": "coverage"
+}

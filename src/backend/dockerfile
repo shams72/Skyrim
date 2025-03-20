@@ -1,0 +1,13 @@
+ARG GITLAB_PROXY
+
+FROM ${GITLAB_PROXY:+${GITLAB_PROXY}/}node:18
+
+WORKDIR /app
+
+COPY package*.json ./
+
+RUN npm install
+
+COPY . .
+
+CMD ["npm", "start"]

@@ -1,0 +1,16 @@
+ARG GITLAB_PROXY
+ARG NAVIGATION_SERVICE_PORT
+
+FROM ${GITLAB_PROXY:+${GITLAB_PROXY}/}node:18
+
+WORKDIR /app
+
+COPY package*.json ./
+
+RUN npm install
+
+COPY . .
+
+EXPOSE ${NAVIGATION_SERVICE_PORT}
+
+CMD ["node", "--require", "./instrumentation.js", "server.js"]

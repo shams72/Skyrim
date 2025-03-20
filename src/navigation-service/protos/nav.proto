@@ -1,0 +1,45 @@
+syntax = "proto3";
+
+package routeguide;
+
+service Routing {
+    rpc GetOptimalPath(OptimalPathRequest) returns (OptimalPathResponse) {}
+    rpc GetOptimalPathStream(stream StreamRequest) returns (OptimalPathResponse) {}
+}
+
+// Define the request message
+message OptimalPathRequest {
+    string start_endpoint = 1;    // Starting point of the path
+    string end_endpoint = 2;      // Destination point of the path
+    ConnectionSchema connections = 3;            // The map containing locations and connections
+}
+
+message StreamRequest {
+    string start_endpoint = 1;    // Starting point of the path
+    string end_endpoint = 2;      // Destination point of the path
+    ConnectionChunkSchema chunk = 3;            // A single connection chunk
+}
+
+// Define the response message
+message OptimalPathResponse {
+    repeated string path_opt = 1;     // Ordered list of location IDs representing the optimal path
+    repeated string path_alt = 2;     // Ordered list of location IDs representing the alt path
+}
+
+// Define the map schema message, with locations and connections
+message ConnectionSchema {
+    repeated Connection connections = 1;     // List of all connections between locations
+}
+
+message ConnectionChunkSchema {
+    string mapname = 1;    // Name of the map
+    int32 chunkid = 2;     // ID of the chunk
+    repeated Connection connections = 3;     // List of all connections between locations
+}
+
+// Define the connection message
+message Connection {
+    string from = 1;        // ID of the starting location
+    string to = 2;          // ID of the destination location
+    int32 dist = 3;    // Connection weight, relevant for later milestones
+}

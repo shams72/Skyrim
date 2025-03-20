@@ -1,0 +1,72 @@
+services:
+  mongo:
+    image: ${GITLAB_PROXY:+${GITLAB_PROXY}/}mongo:latest
+    container_name: mongo
+    ports:
+      - '27017:27017'
+    volumes:
+      - mongo-data:/data/db
+
+  mongo-express:
+    image: ${GITLAB_PROXY:+${GITLAB_PROXY}/}mongo-express:latest
+    container_name: mongo-express
+    restart: always
+    depends_on:
+      - mongo
+    ports:
+      - '8081:8081' # HTTP interface on port 8081
+    environment:
+      ME_CONFIG_MONGODB_SERVER: mongo # Points to the MongoDB service
+      # username admin, password pass
+
+  backend:
+    build:
+      context: ./src/backend
+      args:
+        GITLAB_PROXY: ${GITLAB_PROXY}
+    image: registry.code.fbi.h-da.de/bpse-wise2425/group1/skyrim-app/backend:latest
+    container_name: backend
+    volumes:
+      - ./src/backend/src:/app/src
+      - ./src/backend/test:/app/test
+      - ./src/backend/logs:/app/logs
+    ports:
+      - '5000:5000'
+    tty: true
+    depends_on:
+      - mongo
+    environment:
+      - MONGO_URI=mongodb://mongo:27017/MapDatabase
+      - BACKEND_PORT=5000
+    links:
+      - mongo
+
+  frontend:
+    build:
+      context: ./src/frontend
+      args:
+        GITLAB_PROXY: ${GITLAB_PROXY}
+        API_URL: ${API_URL:-http://localhost:5000}
+    image: registry.code.fbi.h-da.de/bpse-wise2425/group1/skyrim-app/frontend:latest
+    container_name: frontend
+    ports:
+      - '3000:80'
+    environment:
+      - API_URL=${API_URL:-http://localhost:5000}
+
+  navigation-service:
+    build:
+      context: ./src/navigation-service
+      args:
+        GITLAB_PROXY: ${GITLAB_PROXY}
+    image: registry.code.fbi.h-da.de/bpse-wise2425/group1/skyrim-app/navigation:latest
+    container_name: navigation-service
+    ports:
+      - '50051:50051'
+    depends_on:
+      - mongo
+    environment:
+      - NODE_ENV=production
+
+volumes:
+  mongo-data:

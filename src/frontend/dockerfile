@@ -1,0 +1,43 @@
+# build process:
+# 1. build Stage:
+#    - uses node js to build the app
+#    - creates production build
+#
+# 2. production stage:
+#    - Uses nginx to serve the built files
+#    - copies build files from previous stage
+#    - sets up nginx config
+#    - adds runtime config generator
+#    - exposes port 80 instead of 3000 (its mapped to 3000 in docker-compose.yml)
+
+ARG GITLAB_PROXY
+ARG FRONTEND_PORT=80
+
+FROM ${GITLAB_PROXY:+${GITLAB_PROXY}/}node:18 AS builder
+
+WORKDIR /app
+
+COPY package*.json ./
+RUN npm install
+COPY . .
+
+ARG API_URL
+ENV REACT_APP_API_URL=${API_URL}
+
+RUN npm run build
+
+# nginx stage
+FROM ${GITLAB_PROXY:+${GITLAB_PROXY}/}nginx:alpine
+
+COPY --from=builder /app/build /usr/share/nginx/html
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+# add script to generate runtime config
+COPY generate-config.sh /docker-entrypoint.d/
+RUN chmod +x /docker-entrypoint.d/generate-config.sh && \
+    dos2unix /docker-entrypoint.d/generate-config.sh
+
+# install dos2unix
+RUN apk add --no-cache dos2unix
+
+EXPOSE ${FRONTEND_PORT}

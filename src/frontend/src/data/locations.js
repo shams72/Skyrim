@@ -1,0 +1,138 @@
+// --- data for the locations ---
+// id is just for frontend use
+// x, y are mapviewer coords
+// type is either city or town (maybe add more types later)
+// image is the image url for the location (what is displayed on the pin)
+
+export const locations = [
+    // cities
+    {
+        id: 1,
+        name: 'Markarth',
+        x: 1.21,
+        y: 54.0,
+        type: 'city',
+        image: 'https://example.com/images/markarth.jpg',
+    },
+    {
+        id: 2,
+        name: 'Solitude',
+        x: 27.32,
+        y: 26.31,
+        type: 'city',
+        image: 'https://example.com/images/solitude.jpg',
+    },
+    {
+        id: 3,
+        name: 'Whiterun',
+        x: 46.37,
+        y: 56.78,
+        type: 'city',
+        image: 'https://example.com/images/whiterun.jpg',
+    },
+    {
+        id: 4,
+        name: 'Windhelm',
+        x: 71.75,
+        y: 44.62,
+        type: 'city',
+        image: 'https://example.com/images/windhelm.jpg',
+    },
+    {
+        id: 5,
+        name: 'Riften',
+        x: 80.64,
+        y: 81.3,
+        type: 'city',
+        image: 'https://example.com/images/riften.jpg',
+    },
+    {
+        id: 6,
+        name: 'Winterhold',
+        x: 66.18,
+        y: 27.36,
+        type: 'city',
+        image: 'https://example.com/images/winterhold.jpg',
+    },
+    // towns
+    {
+        id: 7,
+        name: 'Karthwasten',
+        x: 10.74,
+        y: 44.69,
+        type: 'town',
+        image: 'https://example.com/images/karthwasten.jpg',
+    },
+    {
+        id: 8,
+        name: 'Dragon Bridge',
+        x: 17.69,
+        y: 32.69,
+        type: 'town',
+        image: 'https://example.com/images/dragonbridge.jpg',
+    },
+    {
+        id: 9,
+        name: 'Morthal',
+        x: 31.99,
+        y: 37.61,
+        type: 'town',
+        image: 'https://example.com/images/morthal.jpg',
+    },
+    {
+        id: 10,
+        name: 'Rorikstead',
+        x: 21.57,
+        y: 53.24,
+        type: 'town',
+        image: 'https://example.com/images/rorikstead.jpg',
+    },
+    {
+        id: 11,
+        name: 'Falkreath',
+        x: 34.18,
+        y: 78.48,
+        type: 'town',
+        image: 'https://example.com/images/falkreath.jpg',
+    },
+    {
+        id: 12,
+        name: 'Helgen',
+        x: 45,
+        y: 76.91,
+        type: 'town',
+        image: 'https://example.com/images/helgen.jpg',
+    },
+    {
+        id: 13,
+        name: 'Riverwood',
+        x: 46.01,
+        y: 67.41,
+        type: 'town',
+        image: 'https://example.com/images/riverwood.jpg',
+    },
+    {
+        id: 14,
+        name: 'Ivarstead',
+        x: 58.48,
+        y: 72.17,
+        type: 'town',
+        image: 'https://example.com/images/ivarstead.jpg',
+    },
+    {
+        id: 15,
+        name: 'Shor’s Stone',
+        x: 78.16,
+        y: 71.44,
+        type: 'town',
+        image: 'https://example.com/images/shorsstone.jpg',
+    },
+    {
+        id: 16,
+        name: 'Dawnstar',
+        x: 47.73,
+        y: 27.37,
+        type: 'town',
+        image: 'https://example.com/images/dawnstar.jpg',
+    },
+];
